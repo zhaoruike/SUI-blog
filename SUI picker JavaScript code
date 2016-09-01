@@ -1,0 +1,33 @@
+  var city = ['北京', '天津', '上海', '广州', '山西', '河北', '河南']
+    var dataList = [[1, 2, 3, 4], [5, 6, 5, 5], [1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4], [6, 6, 6, 6]]
+    var data = dataList[0]
+    $("#city").picker({
+        toolbarTemplate: '<header class="bar bar-nav">\
+    <button class="button button-link pull-right close-picker">确定</button>\
+    <h1 class="title">标题</h1>\
+    </header>',
+        cols: [
+            {
+                textAlign: 'center',
+                values: city
+            },
+            {
+                textAlign: 'center',
+                values: data
+            }
+        ],
+        onOpen: function () {
+            $('.picker-modal').on('touchend', function () {
+                var $selected = $('.picker-selected').html()
+                var index = city.indexOf($selected)
+                data = dataList[index]
+                console.log($selected, index, data)
+                var str = ''
+                for (var i = 0, len = data.length; i < len; i++) {
+                    str += '<div class="picker-item " data-picker-value="1">' + data[i] + '</div>'
+                    console.log(str)
+                }
+                $('.picker-items-col-wrapper').eq(1).html(str)
+            })
+        }
+    });
